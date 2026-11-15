@@ -1,0 +1,9 @@
+{
+  "name": "radar-de-ruptura",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demonstração de análise de ruptura de ingredientes em restaurantes",
+  "scripts": { "start": "node server.mjs", "test": "node --test tests/*.test.mjs", "build": "node build-standalone.mjs" },
+  "engines": { "node": ">=22" }
+}

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0c514c"><title>Radar de Ruptura · Bistrô Horizonte</title><meta name="description" content="Antecipe a falta de ingredientes a partir do estoque, das receitas e da demanda informada."><style>:root{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#1c2f2c;background:#f5f7f6;font-synthesis:none;--teal:#115c53;--border:#e3e9e6;--muted:#667771}*{box-sizing:border-box}body{margin:0;font-size:14px;line-height:1.5}a{color:var(--teal);text-decoration:none}button,input,select{font:inherit}button,a,input,select,summary{outline-offset:4px}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}svg{width:20px;height:20px;flex-shrink:0;vertical-align:middle}.skip{position:absolute;top:-100px;z-index:100;background:white;padding:12px}.skip:focus{top:0}.sidebar{position:fixed;left:0;top:0;width:248px;height:100dvh;background:#fff;border-right:1px solid var(--border);padding:30px 20px;display:flex;flex-direction:column;z-index:5}.brand{display:flex;align-items:center;gap:10px;margin:0 10px 32px;color:#173e37;font-size:28px;font-weight:750;line-height:1.1;letter-spacing:-1px}.brand span{display:block;font-size:9px;letter-spacing:2.8px;margin-top:6px}.brand-icon{width:38px;height:38px;background:#e6f2ed;display:grid;place-items:center;border-radius:11px}.brand-icon svg{width:27px;height:27px}.workspace{display:flex;gap:10px;align-items:center;padding:14px 9px;border:1px solid var(--border);border-radius:9px;margin-bottom:26px}.avatar{width:31px;height:31px;background:#f0ebe1;color:#756640;border-radius:8px;display:grid;place-items:center;font-size:10px;font-weight:700}.workspace strong{display:block;font-size:12px}.workspace span{display:block;font-size:10px;color:var(--muted)}.nav-label{font-size:10px;font-weight:700;letter-spacing:1.6px;color:#73837d;margin:0 12px 12px}nav{display:flex;flex-direction:column;gap:5px}nav a{display:flex;gap:12px;align-items:center;color:#566860;padding:11px 12px;border-radius:7px;font-size:12px;font-weight:550}nav a[aria-current]{background:#e8f3ee;color:#115d4e}nav a:hover{background:#f0f5f2}nav a b{margin-left:auto;font-size:10px;background:#fff;padding:1px 7px;border-radius:4px}.sidebar-foot{margin-top:auto;font-size:11px;color:#4e6d61;padding:20px 10px 0}.sidebar-foot p{margin:5px 0 23px;color:var(--muted);font-size:10px}.sidebar-foot small{font-size:9px;letter-spacing:1px;color:#74827c}.online{display:inline-block;background:#35956b;width:6px;height:6px;border-radius:50%;margin-right:6px}.layout{margin-left:248px}.topbar{height:76px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-size:11px;color:#63736c}.topbar>div{display:flex;align-items:center;gap:22px}.profile{width:30px;height:30px;background:#f1eee6;border-radius:50%;display:grid;place-items:center;font-size:10px;color:#766342}main{max-width:1520px;margin:auto;padding:36px 40px 20px;outline:none}.page-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 27px}.eyebrow{font-size:9px;letter-spacing:1.6px;font-weight:750;color:#60796a;margin:0 0 8px}h1{font-size:28px;font-weight:650;letter-spacing:-.9px;margin:0 0 7px;line-height:1.25}.page-heading p:not(.eyebrow){font-size:12px;color:var(--muted);margin:0}h2{font-size:14px;font-weight:650;letter-spacing:-.2px;margin:0}h3{font-size:13px;margin:23px 0 10px}.btn{border:1px solid #d8e2dc;background:#fff;color:#34534a;border-radius:6px;padding:10px 14px;font-size:11px;font-weight:650;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}.btn svg{width:16px;height:16px}.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}.btn:hover{filter:brightness(.95)}.btn.text{border:0;background:none;padding:5px 7px}.btn.small{padding:7px 10px;font-size:10px}.muted{color:var(--muted)}.reading{display:flex;align-items:center;font-size:10px;color:#466b57;margin-bottom:13px}.reading>span:last-child{margin-left:auto;color:var(--muted)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:24px}.metric{border:1px solid var(--border);border-radius:9px;background:#fff;padding:18px}.metric>div{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:11px;color:#5a6e62;font-weight:600}.metric>div svg{color:#85988b;width:17px;height:17px}.metric>strong{display:block;font-size:34px;line-height:1.2;letter-spacing:-1px;font-weight:600;margin:12px 0 9px}.metric>small{font-size:10px;color:#718078}.metric.danger>strong,.metric.danger>div svg{color:#ad443b}.metric.warning>strong,.metric.warning>div svg{color:#a87827}.metric.teal>strong{color:#125d51}.dashboard-grid{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(250px,1fr);gap:22px}.panel{background:#fff;border:1px solid var(--border);border-radius:9px;min-width:0;overflow:hidden}.panel-head{display:flex;justify-content:space-between;align-items:center;padding:22px 22px 18px;gap:15px}.panel-head p{font-size:10px;color:var(--muted);margin:5px 0 0}.panel-head>a{font-size:10px;white-space:nowrap}.panel-head>a svg{width:13px;height:13px}.table-scroll{overflow:auto;width:100%}table{width:100%;border-collapse:collapse;font-size:11px;text-align:left;white-space:nowrap}th{background:#fafbf9;color:#718078;font-size:9px;font-weight:600;padding:11px 20px;border-bottom:1px solid var(--border)}td{padding:16px 20px;border-bottom:1px solid #eef1ee;color:#52675a}tr:last-child td{border-bottom:0}td strong{font-weight:600;color:#304b3d}td small{display:block;font-size:9px;color:#7a877f;margin-top:3px}.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:5px;font-size:9px;font-weight:600;white-space:nowrap;color:#5c7264;background:#f0f4f0;line-height:1.3}.badge>span{width:4px;height:4px;background:currentColor;border-radius:50%}.badge.critical{background:#fbeae7;color:#a43b31}.badge.attention{background:#fcf2dd;color:#8b6019}.badge.normal{background:#eaf5ed;color:#2d774c}.badge.demo{color:#87652f;background:#fbf3e3}.insight{background:#eaf2eb;border:1px solid #d9e6dc;border-radius:9px;padding:25px;display:flex;align-items:flex-start;flex-direction:column}.insight-icon{height:35px;width:35px;border-radius:9px;background:#d6e7d9;display:grid;place-items:center;margin-bottom:21px;color:#306449}.insight>.eyebrow{font-size:8px;letter-spacing:1.2px;color:#55795d}.insight h2{font-size:21px;letter-spacing:-.5px;line-height:1.3;margin:3px 0 13px;color:#254a34}.insight>p:not(.eyebrow){font-size:11px;color:#51705a;line-height:1.8;margin:0 0 21px}.insight-foot{font-size:9px;color:#65826b;padding-top:18px;margin-top:auto;line-height:1.7}.bottom-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:22px;margin-top:22px}.compact{padding-bottom:20px}.big-stat{font-size:32px;margin:0 22px 15px;font-weight:600;letter-spacing:-1px}.big-stat span{font-size:11px;color:#6a7a6f;margin-left:9px;font-weight:400;letter-spacing:0}.text-link{font-size:10px;margin:0 22px}.text-link svg{width:13px}.activity{display:flex;align-items:center;gap:10px;margin:0 20px;width:calc(100% - 40px);border:0;border-bottom:1px solid #eef1ee;background:#fff;text-align:left;padding:10px 0;color:#486450}.activity strong{font-size:11px;font-weight:550;display:block}.activity small{font-size:9px;color:#78877c;display:block;margin-top:3px}.activity svg{margin-left:auto;width:15px}.activity-dot{width:7px;height:7px;border:2px solid #80a48a;border-radius:50%}.compact>.muted{font-size:11px;margin:0 22px}.count{margin-left:7px;font-size:10px;background:#f0f4ef;color:#6a7e6d;padding:2px 6px;border-radius:4px}.callout{border:1px solid #dce7dc;background:#edf4ed;border-radius:7px;padding:15px 18px;color:#536f56;font-size:11px;line-height:1.7;margin:20px 0}.callout.critical{border-color:#e4b6b0;background:#fcf0ed;color:#8e3b30}.callout p{margin:6px 0}.actions{display:flex;align-items:center;gap:5px}.danger-text{color:#a33d31!important}.recipe-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.recipe-card{padding:22px}.recipe-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.recipe-symbol{background:#ecf4ed;padding:10px;border-radius:8px;color:#40714a}.recipe-card h2{font-size:18px}.recipe-card>p{font-size:10px;color:var(--muted);margin:4px 0 20px}.recipe-card ul{list-style:none;padding:0;margin:0 0 20px;min-height:96px}.recipe-card li{display:flex;justify-content:space-between;font-size:10px;gap:8px;padding:9px 0;border-bottom:1px solid #f0f3ef}.recipe-card li strong{font-weight:550;white-space:nowrap}.capacity{padding:13px;background:#f6f8f4;border-radius:5px;margin:15px 0 20px;font-size:10px}.capacity strong{display:block;font-size:15px;margin-top:3px}.demand-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:22px}.demand-row{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-top:1px solid #eef1ed;gap:20px}.demand-row label{font-size:12px}.demand-row strong,.demand-row small{display:block}.demand-row small{font-size:10px;color:var(--muted);font-weight:400;margin-top:5px}.demand-row input{width:100px;text-align:center;padding:9px;border:1px solid #d5dfd5;border-radius:6px;color:#254d32}.form-bottom{display:flex;align-items:center;justify-content:space-between;background:#f8faf6;padding:18px 24px;gap:15px}.form-bottom span{display:block;font-size:10px;color:var(--muted)}.form-bottom strong{font-size:17px}.form-note{font-size:10px;color:var(--muted);line-height:1.7}form>.form-note{padding:0 24px 10px}.explain-card{padding:26px}.explain-card h2{font-size:20px;margin-bottom:24px;max-width:260px}.legend-item{margin-bottom:18px}.legend-item p{font-size:11px;margin:6px 0 0;color:var(--muted)}.explain-card .callout{margin:24px 0 0}.analysis-preview{margin-top:24px}.table-link{background:none;border:0;padding:0;color:var(--teal);display:block;font-size:9px;margin-top:5px}.content-card{padding:27px;font-size:12px;color:#526e58}.content-card h2{font-size:21px;color:#21432d;margin-bottom:17px}.content-card h3{color:#314b38}.content-card p{line-height:1.8}.content-card .btn{margin-top:10px}.empty{text-align:center;padding:45px 25px;color:#6b7e6d;font-size:12px}.empty>svg{width:30px;height:30px;opacity:.6}.empty h3{font-size:15px;color:#3e5b43;margin:13px 0 0}.empty p{margin-bottom:20px}footer{border-top:1px solid var(--border);margin-top:35px;padding-top:17px;display:flex;gap:8px;font-size:9px;color:#7a887c}dialog{border:1px solid var(--border);border-radius:12px;box-shadow:0 25px 90px #183b3033;width:min(480px,calc(100vw - 24px));max-height:90dvh;padding:0;color:inherit}dialog.wide{width:min(1060px,calc(100vw - 24px))}dialog::backdrop{background:#12342b66;backdrop-filter:blur(2px)}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:23px 26px;border-bottom:1px solid var(--border)}.modal-head h2{font-size:20px}.close{border:0;background:none;color:#6c8170;font-size:26px;padding:0 4px}.modal-body{padding:20px 26px;font-size:12px}.modal-body>.table-scroll{margin:20px 0}.modal-foot{padding:18px 26px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;background:#fafcf8}.field{display:block;margin-bottom:17px;font-size:11px;font-weight:600;color:#3c5b44}.field input,.field select{display:block;width:100%;padding:10px 11px;margin-top:6px;border:1px solid #cbd9cc;border-radius:6px;color:#2d4f37;background:white;min-height:41px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form-error{color:#a03e30;font-size:11px;margin:12px 0 0}.form-error:empty{display:none}.checkbox{display:flex;align-items:flex-start;gap:8px;margin-top:20px}.checkbox input{margin-top:4px}details{font-size:11px;color:#53705b}summary{cursor:pointer;font-weight:600}#toast{position:fixed;bottom:24px;left:calc(50% + 124px);transform:translate(-50%,15px);background:#1e4030;color:white;font-size:12px;padding:14px 22px;border-radius:8px;box-shadow:0 8px 35px #15342122;z-index:30;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:min(560px,90vw)}#toast.visible{opacity:1;transform:translate(-50%,0)}
+@media(min-width:1500px){main{padding-top:45px}.metrics{gap:20px}.metric{padding:23px}.metric>strong{font-size:39px}td{padding-top:19px;padding-bottom:19px}}
+@media(max-width:1150px){.sidebar{width:215px;padding-left:13px;padding-right:13px}.layout{margin-left:215px}main{padding:28px 25px 20px}.topbar{padding:0 25px}h1{font-size:24px}.metrics{gap:10px}.metric{padding:15px}.metric>div{font-size:10px}.metric>small{font-size:9px}.dashboard-grid{grid-template-columns:1fr}.insight{display:block}.insight-icon{float:right}.insight h2{font-size:20px}.insight-foot{display:none}.recipe-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#toast{left:calc(50% + 108px)}}
+@media(max-width:760px){.sidebar{position:static;width:100%;height:auto;padding:18px 20px 12px;border-right:0;border-bottom:1px solid var(--border)}.brand{font-size:24px;margin:0 0 18px}.brand span{font-size:7px}.brand-icon{height:33px;width:33px}.workspace,.nav-label,.sidebar-foot{display:none}nav{flex-direction:row;overflow:auto;gap:4px;padding-bottom:5px}nav a{padding:9px;white-space:nowrap;font-size:10px;gap:6px}nav a svg{width:16px;height:16px}.layout{margin-left:0}.topbar{height:57px;padding:0 20px;font-size:10px}.topbar>div{gap:10px}.topbar .profile{display:none}main{padding:25px 18px 18px}.page-heading{align-items:flex-start;flex-direction:column;gap:17px;margin-bottom:22px}h1{font-size:25px}.page-heading p:not(.eyebrow){font-size:11px}.reading{font-size:10px;display:block}.reading>span:last-child{display:block;margin-top:3px;font-size:9px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{padding:15px}.metric>strong{font-size:31px;margin:10px 0 5px}.bottom-grid,.demand-grid,.recipe-grid{grid-template-columns:1fr}.panel-head{padding:20px 17px}.panel-head h2{font-size:13px}.panel-head p{font-size:9px}th{padding:11px 16px}td{padding:14px 16px}.insight{padding:22px}.insight>p:not(.eyebrow){font-size:12px}.content-card{padding:23px}.form-bottom{padding:18px;flex-wrap:wrap}.demand-row{padding:18px}.demand-row input{width:85px}footer{font-size:8px;display:block;line-height:1.8}#toast{left:50%;bottom:15px}.modal-body{padding:20px 18px}.modal-head,.modal-foot{padding:20px 18px}.modal-head h2{font-size:18px}.field-grid{grid-template-columns:1fr}.badge{font-size:9px}.recipe-card ul{min-height:auto}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head>
+<body><a class="skip" href="#main">Pular para o conteúdo</a><div id="app"></div><div id="toast" role="status" aria-live="polite"></div><dialog id="modal" aria-labelledby="modal-title"><form id="modal-form"><div id="modal-content"></div></form></dialog><noscript>Ative o JavaScript para usar a demonstração.</noscript><script type="module">// Quantidades são calculadas em milésimos inteiros, evitando erros de ponto flutuante.
+const UNITS = ['un', 'kg', 'L'];
+const MAX_QUANTITY = 1000000;
+const MAX_ORDERS = 1000000;
+function quantity(value, unit = 'kg', label = 'Quantidade') {
+  if (typeof value !== 'number' && typeof value !== 'string') throw new Error(`${label}: informe um número.`);
+  if (typeof value === 'string' && !/^\d+(?:[.,]\d{1,3})?$/.test(value.trim())) throw new Error(`${label}: use um número positivo com até três casas decimais.`);
+  const n = Number(String(value).trim().replace(',', '.'));
+  if (!Number.isFinite(n) || n < 0 || n > MAX_QUANTITY) throw new Error(`${label}: informe de 0 a 1.000.000.`);
+  const scaled = Math.round(n * 1000);
+  if (Math.abs(n * 1000 - scaled) > 0.000001) throw new Error(`${label}: use até três casas decimais.`);
+  if (unit === 'un' && !Number.isInteger(n)) throw new Error(`${label}: unidades devem ser inteiras.`);
+  return scaled;
+}
+function orders(value) {
+  if ((typeof value !== 'number' && typeof value !== 'string') || (typeof value === 'string' && !/^\d+$/.test(value.trim()))) throw new Error('Informe a quantidade inteira de pedidos.');
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < 0 || n > MAX_ORDERS) throw new Error('Pedidos devem ser inteiros de 0 a 1.000.000.');
+  return n;
+}
+function text(value, label = 'Nome') {
+  if (typeof value !== 'string' || !value.trim() || value.trim().length > 80) throw new Error(`${label}: use entre 1 e 80 caracteres.`);
+  return value.trim();
+}
+function identifier(value) {
+  if (typeof value !== 'string' || !/^[a-zA-Z0-9_-]{1,80}$/.test(value)) throw new Error('Identificador inválido.');
+}
+function validateCatalog(ingredients, recipes, demand) {
+  if (!Array.isArray(ingredients) || !Array.isArray(recipes) || !demand || typeof demand !== 'object' || Array.isArray(demand)) throw new Error('Dados da operação inválidos.');
+  const allIds = new Set();
+  for (const i of ingredients) {
+    identifier(i.id); text(i.name); if (allIds.has(i.id)) throw new Error('Ingrediente duplicado.'); allIds.add(i.id);
+    if (!UNITS.includes(i.unit)) throw new Error('Unidade inválida.');
+    quantity(i.stock, i.unit, 'Estoque'); quantity(i.safety, i.unit, 'Reserva');
+  }
+  const recipeIds = new Set();
+  for (const r of recipes) {
+    identifier(r.id); text(r.name);
+    if (recipeIds.has(r.id)) throw new Error('Prato duplicado.'); recipeIds.add(r.id);
+    if (!Array.isArray(r.items) || !r.items.length) throw new Error('Adicione pelo menos um ingrediente à receita.');
+    const seen = new Set();
+    for (const item of r.items) {
+      const ingredient = ingredients.find(i => i.id === item.ingredientId);
+      if (!ingredient) throw new Error('A receita referencia um ingrediente que não existe.');
+      if (seen.has(item.ingredientId)) throw new Error('Não repita um ingrediente na mesma receita.'); seen.add(item.ingredientId);
+      if (item.unit !== ingredient.unit) throw new Error('A unidade da receita deve ser igual à do ingrediente.');
+      if (quantity(item.quantity, item.unit, 'Consumo por prato') <= 0) throw new Error('O consumo por prato deve ser maior que zero.');
+    }
+  }
+  for (const [id, n] of Object.entries(demand)) { if (!recipeIds.has(id)) throw new Error('Demanda com prato inexistente.'); orders(n); }
+}
+function calculate(ingredients, recipes, demand) {
+  validateCatalog(ingredients, recipes, demand);
+  const totals = new Map(ingredients.map(i => [i.id, 0]));
+  for (const recipe of recipes) for (const item of recipe.items) {
+    const amount = quantity(item.quantity, item.unit) * orders(demand[recipe.id] ?? 0);
+    const sum = totals.get(item.ingredientId) + amount;
+    if (!Number.isSafeInteger(sum)) throw new Error('Demanda excede o limite de cálculo seguro.');
+    totals.set(item.ingredientId, sum);
+  }
+  const rows = ingredients.map(i => {
+    const required = totals.get(i.id), stock = quantity(i.stock, i.unit), safety = quantity(i.safety, i.unit);
+    if (!Number.isSafeInteger(required + safety)) throw new Error('Demanda excede o limite de cálculo seguro.');
+    const projected = stock - required;
+    const shortage = Math.max(0, required - stock);
+    const replenish = Math.max(0, required + safety - stock);
+    return { ingredientId: i.id, name: i.name, unit: i.unit, stock: stock / 1000, safety: safety / 1000, required: required / 1000, projected: projected / 1000, shortage: shortage / 1000, replenish: replenish / 1000, risk: projected < 0 ? 'critical' : projected <= safety ? 'attention' : 'normal', affectedRecipes: recipes.filter(r => orders(demand[r.id] ?? 0) > 0 && r.items.some(it => it.ingredientId === i.id)).map(r => r.name) };
+  });
+  const menu = recipes.map(r => ({ recipeId: r.id, name: r.name, demand: orders(demand[r.id] ?? 0), capacity: Math.min(...r.items.map(it => Math.floor(quantity(ingredients.find(i => i.id === it.ingredientId).stock, it.unit) / quantity(it.quantity, it.unit)))), atRisk: orders(demand[r.id] ?? 0) > 0 && r.items.some(it => rows.some(row => row.ingredientId === it.ingredientId && row.shortage > 0)) }));
+  return { rows, menu, totalOrders: menu.reduce((sum, r) => sum + r.demand, 0) };
+}
+function explain(result) {
+  const critical = result.rows.filter(r => r.risk === 'critical');
+  const attention = result.rows.filter(r => r.risk === 'attention');
+  if (critical.length) return `${critical.length} ingrediente(s) não cobrem a demanda informada. Priorize a falta real antes de recompor a reserva. ${result.menu.filter(r => r.atRisk).length} prato(s) com pedidos estimados usam esses ingredientes; a divisão do estoque entre eles precisa ser decidida pelo responsável.`;
+  if (attention.length) return `A demanda informada cabe no estoque. ${attention.length} ingrediente(s) ficarão no limite ou abaixo da reserva. Revise a reposição antes do próximo atendimento.`;
+  return 'O estoque cobre a demanda informada e mantém todos os ingredientes acima da reserva configurada.';
+}
+
+const clone = value => structuredClone(value);
+const uid = () => crypto.randomUUID();
+function demo() {
+  return { version: 1, restaurant: 'Bistrô Horizonte', revision: 0, ingredients: [
+    {id:'pao',name:'Pão de hambúrguer',unit:'un',stock:8,safety:0},
+    {id:'carne',name:'Hambúrguer bovino',unit:'un',stock:15,safety:0},
+    {id:'queijo',name:'Queijo muçarela',unit:'kg',stock:0.6,safety:0.2},
+    {id:'batata',name:'Batata pré-frita',unit:'kg',stock:3,safety:1},
+    {id:'oleo',name:'Óleo vegetal',unit:'L',stock:2,safety:0.5},
+    {id:'alface',name:'Alface higienizada',unit:'kg',stock:0.5,safety:0.1}
+  ], recipes: [
+    {id:'burger',name:'X-Burger',items:[{ingredientId:'pao',quantity:1,unit:'un'},{ingredientId:'carne',quantity:1,unit:'un'},{ingredientId:'queijo',quantity:0.025,unit:'kg'}]},
+    {id:'fritas',name:'Porção de fritas',items:[{ingredientId:'batata',quantity:0.25,unit:'kg'},{ingredientId:'oleo',quantity:0.03,unit:'L'}]},
+    {id:'salada',name:'Salada do bistrô',items:[{ingredientId:'alface',quantity:0.1,unit:'kg'},{ingredientId:'queijo',quantity:0.025,unit:'kg'}]}
+  ], demand: {burger:12,fritas:8,salada:4}, analyses: [] };
+}
+function validateState(s) {
+  if (!s || s.version !== 1 || !Number.isSafeInteger(s.revision) || s.revision < 0 || !Array.isArray(s.analyses)) throw new Error('Arquivo salvo inválido ou incompatível.');
+  validateCatalog(s.ingredients, s.recipes, s.demand);
+  const seen = new Set();
+  for (const a of s.analyses) {
+    identifier(a.id);
+    if (typeof a.id !== 'string' || seen.has(a.id) || !Number.isFinite(Date.parse(a.createdAt)) || a.source !== 'local' || !a.snapshot || !Array.isArray(a.proposals)) throw new Error('Histórico inválido.');
+    seen.add(a.id);
+    const expected = calculate(a.snapshot.ingredients, a.snapshot.recipes, a.snapshot.demand);
+    if (JSON.stringify(expected) !== JSON.stringify(a.result)) throw new Error('O histórico contém cálculos inconsistentes.');
+    const wanted = expected.rows.filter(r => r.replenish > 0);
+    if (a.proposals.length !== wanted.length) throw new Error('Propostas inconsistentes.');
+    const ingredientIds = new Set();
+    for (const p of a.proposals) {
+      const row = wanted.find(r => r.ingredientId === p.ingredientId);
+      if (!row || ingredientIds.has(p.ingredientId) || p.id !== `${a.id}:${p.ingredientId}` || p.quantity !== row.replenish || p.shortage !== row.shortage || p.createdAt !== a.createdAt || p.unit !== row.unit || p.name !== row.name || !['pending','approved','rejected'].includes(p.status) || !Array.isArray(p.decisions)) throw new Error('Proposta inválida.');
+      ingredientIds.add(p.ingredientId);
+      if (p.status === 'pending' ? p.decisions.length !== 0 : p.decisions.length !== 1 || p.decisions[0].status !== p.status || !Number.isFinite(Date.parse(p.decisions[0].at))) throw new Error('Decisão inválida.');
+    }
+  }
+  return s;
+}
+function newAnalysis(state, now = new Date().toISOString(), id = uid()) {
+  if (state.analyses.some(a => a.id === id)) throw new Error('Análise já registrada.');
+  const snapshot = clone({ingredients:state.ingredients,recipes:state.recipes,demand:state.demand});
+  const result = calculate(snapshot.ingredients, snapshot.recipes, snapshot.demand);
+  const proposals = result.rows.filter(r => r.replenish > 0).map(r => ({id:`${id}:${r.ingredientId}`,ingredientId:r.ingredientId,name:r.name,unit:r.unit,quantity:r.replenish,shortage:r.shortage,status:'pending',createdAt:now,decisions:[]}));
+  return {id,createdAt:now,source:'local',snapshot,result,proposals};
+}
+function decide(state, proposalId, status, now = new Date().toISOString()) {
+  if (!['approved','rejected'].includes(status)) throw new Error('Decisão inválida.');
+  const next = clone(state);
+  const p = next.analyses.flatMap(a => a.proposals).find(p => p.id === proposalId);
+  if (!p || p.status !== 'pending') throw new Error('A proposta já foi decidida ou não existe.');
+  p.status = status; p.decisions.push({status,at:now});
+  return next;
+}
+function removeIngredient(state, id) {
+  if (state.recipes.some(r => r.items.some(i => i.ingredientId === id))) throw new Error('Ingrediente usado em uma receita. Remova o vínculo no cardápio antes de excluir.');
+  const next = clone(state); next.ingredients = next.ingredients.filter(i => i.id !== id); return next;
+}
+function removeRecipe(state, id) {
+  const next = clone(state); next.recipes = next.recipes.filter(r => r.id !== id); delete next.demand[id]; return next;
+}
+
+const STORAGE_KEY = 'radar-ruptura:v1';
+function load(storage) {
+  const raw = storage.getItem(STORAGE_KEY);
+  return raw === null ? demo() : validateState(JSON.parse(raw));
+}
+function save(storage, next, expectedRevision) {
+  const raw = storage.getItem(STORAGE_KEY);
+  if ((raw === null && expectedRevision !== 0) || (raw !== null && JSON.parse(raw).revision !== expectedRevision)) throw new Error('Os dados mudaram em outra aba. Recarregue a página antes de continuar.');
+  const updated = {...next, revision: expectedRevision + 1};
+  validateState(updated);
+  storage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  return updated;
+}
+
+
+const app = document.querySelector('#app'), modal = document.querySelector('#modal'), modalForm = document.querySelector('#modal-form');
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(n);
+const date = d => new Intl.DateTimeFormat('pt-BR',{dateStyle:'short',timeStyle:'short'}).format(new Date(d));
+const icons = {
+ radar:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="m12 12 6-6M12 2v2M2 12h2M12 20v2M20 12h2"/>',
+ overview:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+ box:'<path d="m3 7 9-4 9 4v10l-9 4-9-4ZM3 7l9 4 9-4M12 11v10M7 5l10 4"/>',
+ menu:'<path d="M4 3v6a3 3 0 0 0 6 0V3M7 3v18M19 3c-4 2-4 9 0 9v9M19 3v9"/>',
+ chart:'<path d="M4 3v18h17M8 16v-5M13 16V7M18 16v-9"/>',
+ check:'<path d="m5 12 4 4L19 6"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ link:'<path d="m10 13 4-4M8 16l-2 2a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0M14 8l2-2a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0"/>',
+ arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',
+ alert:'<path d="m12 3 10 18H2ZM12 9v5M12 17v1"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>',
+ download:'<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>'
+};
+const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] ?? icons.radar}</svg>`;
+const risks = {critical:'Crítico',attention:'Atenção',normal:'Normal'};
+const statuses = {pending:'Pendente',approved:'Aprovada',rejected:'Rejeitada'};
+const badge = (label, kind='neutral') => `<span class="badge ${kind}"><span></span>${esc(label)}</span>`;
+const button = (label,action,id='',kind='secondary') => `<button class="btn ${kind}" type="button" data-action="${action}" data-id="${esc(id)}">${esc(label)}</button>`;
+const empty = (title,copy,action='') => `<div class="empty">${icon('radar')}<h3>${esc(title)}</h3><p>${esc(copy)}</p>${action}</div>`;
+let state, corrupt = false, storageError = '', draftDemand, submitModal;
+try {state=load(localStorage);} catch(e) {state=demo();corrupt=true;storageError=e.message;}
+draftDemand={...state.demand};
+let toastTimer;
+function toast(message) {const el=document.querySelector('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),5500);}
+function commit(next,message) {
+  if (corrupt) throw new Error('Não foi possível ler os dados salvos. Exporte o arquivo original em Sobre o projeto antes de restaurar a demonstração.');
+  try {state=save(localStorage,next,state.revision);} catch(e) {throw new Error(`Nada foi alterado. ${e.message}`);}
+  render();if(message)toast(message);
+}
+const pages = [ ['visao','Visão geral','overview'],['estoque','Ingredientes','box'],['cardapio','Cardápio e receitas','menu'],['demanda','Demanda e análise','chart'],['propostas','Reposições','check'],['historico','Histórico','clock'],['sobre','Sobre o projeto','link'] ];
+const currentPage = () => pages.some(p=>p[0]===location.hash.slice(1)) ? location.hash.slice(1) : 'visao';
+function render() {
+  const page=currentPage(), result=calculate(state.ingredients,state.recipes,state.demand);
+  const pending=state.analyses.flatMap(a=>a.proposals).filter(p=>p.status==='pending').length;
+  const titles={visao:['Seu próximo serviço, sem surpresas.','Cruze estoque, receitas e demanda antes de abrir a cozinha.'],estoque:['Cada ingrediente conta.','Mantenha o saldo disponível e a reserva de segurança atualizados.'],cardapio:['A receita por trás do prato.','Defina o consumo por porção para calcular o que sua cozinha precisa.'],demanda:['Antecipe o próximo serviço.','Informe sua estimativa de pedidos e registre uma análise.'],propostas:['Da análise à decisão.','Revise cada reposição. Aprovar não altera o estoque nem realiza compras.'],historico:['Decisões com memória.','Consulte a fotografia dos dados usados em cada análise.'],sobre:['Uma operação mais previsível.','Demonstração independente de um projeto de portfólio.']};
+  app.innerHTML=`<aside class="sidebar"><a class="brand" href="#visao"><div class="brand-icon">${icon('radar')}</div><div>radar<span>DE RUPTURA</span></div></a><div class="workspace"><div class="avatar">BH</div><div><strong>Bistrô Horizonte</strong><span>Restaurante de demonstração</span></div></div><p class="nav-label">OPERAÇÃO</p><nav aria-label="Navegação principal">${pages.map(([key,label,i])=>`<a href="#${key}" ${page===key?'aria-current="page"':''}>${icon(i)}<span>${label}</span>${key==='propostas' && pending?`<b>${pending}</b>`:''}</a>`).join('')}</nav><div class="sidebar-foot"><span class="online"></span>Dados neste navegador<p>Sem conexão com sistemas reais.</p><small>PROJETO DE PORTFÓLIO · v0.1</small></div></aside><div class="layout"><header class="topbar"><span>Operação <span class="muted">/ ${pages.find(p=>p[0]===page)[1]}</span></span><div>${badge('Dados de demonstração','demo')}<div class="profile" title="Bistrô Horizonte">BH</div></div></header><main id="main" tabindex="-1"><div class="page-heading"><div><p class="eyebrow">BISTRÔ HORIZONTE</p><h1>${titles[page][0]}</h1><p>${titles[page][1]}</p></div>${page==='estoque'?button('+ Novo ingrediente','ingredient-new','','primary'):page==='cardapio'?button('+ Novo prato','recipe-new','','primary'):page==='visao'?'<a class="btn primary" href="#demanda">Nova análise '+icon('arrow')+'</a>':''}</div>${corrupt?`<div role="alert" class="callout critical"><strong>Os dados salvos não puderam ser lidos.</strong><p>A demonstração abaixo é temporária. O arquivo original foi preservado. Acesse Sobre o projeto para exportar e restaurar.</p><small>${esc(storageError)}</small></div>`:''}${({visao:dashboard,estoque:inventory,cardapio:menu,demanda:demand,propostas:proposals,historico:history,sobre:about}[page])(result)}<footer>Radar de Ruptura <span>·</span> Dados fictícios. Projeto independente, sem vínculo com o iFood.</footer></main></div>`;
+}
+function metric(label,value,copy,kind,ic) {return `<article class="metric ${kind}"><div><span>${label}</span>${icon(ic)}</div><strong>${value}</strong><small>${copy}</small></article>`;}
+function dashboard(r) {
+  const critical=r.rows.filter(i=>i.risk==='critical'),attention=r.rows.filter(i=>i.risk==='attention');
+  const sorted=[...r.rows].sort((a,b)=>({critical:0,attention:1,normal:2}[a.risk]-{critical:0,attention:1,normal:2}[b.risk]));
+  return `<div class="reading"><span class="online"></span>Leitura atual <span>Estoque atual + última demanda salva · cálculo local</span></div><section class="metrics" aria-label="Indicadores da operação">${metric('Ingredientes em risco',critical.length,'de '+r.rows.length+' ingredientes cadastrados','danger','alert')}${metric('Requerem atenção',attention.length,'no limite ou abaixo da reserva','warning','box')}${metric('Pedidos estimados',fmt(r.totalOrders),'informados pelo responsável','teal','menu')}${metric('Pratos afetados',r.menu.filter(m=>m.atRisk).length,'com demanda e ingredientes em falta','plain','chart')}</section><div class="dashboard-grid"><section class="panel"><div class="panel-head"><div><h2>Prioridades do serviço</h2><p>O que pode faltar na cozinha</p></div><a href="#demanda">Ver análise ${icon('arrow')}</a></div>${sorted.length?`<div class="table-scroll"><table><thead><tr><th>Ingrediente</th><th>Disponível</th><th>Necessário</th><th>Situação</th></tr></thead><tbody>${sorted.map(i=>`<tr><td><strong>${esc(i.name)}</strong><small>${i.affectedRecipes.length?esc(i.affectedRecipes.join(' · ')):'Sem demanda associada'}</small></td><td>${fmt(i.stock)} <span class="muted">${i.unit}</span></td><td>${fmt(i.required)} <span class="muted">${i.unit}</span></td><td>${badge(risks[i.risk],i.risk)}</td></tr>`).join('')}</tbody></table></div>`:empty('Seu estoque começa aqui','Cadastre os ingredientes antes de analisar.','<a class="btn primary" href="#estoque">Ir para ingredientes</a>')}</section><aside class="insight"><div class="insight-icon">${icon('radar')}</div><p class="eyebrow">LEITURA DA OPERAÇÃO</p><h2>${critical.length?'Atenção antes de abrir.':attention.length?'A reserva merece cuidado.':'Tudo pronto para o serviço.'}</h2><p>${esc(explain(r))}</p><a class="btn primary" href="#demanda">Revisar demanda ${icon('arrow')}</a><div class="insight-foot">Explicação gerada por regras.<br>Sem previsão automática de vendas.</div></aside></div><div class="bottom-grid"><section class="panel compact"><div class="panel-head"><div><h2>Reposições a revisar</h2><p>Propostas registradas no histórico</p></div>${icon('check')}</div><div class="big-stat">${state.analyses.flatMap(a=>a.proposals).filter(p=>p.status==='pending').length}<span>propostas pendentes</span></div><a class="text-link" href="#propostas">Abrir reposições ${icon('arrow')}</a></section><section class="panel compact"><div class="panel-head"><div><h2>Últimas análises</h2><p>Cada registro preserva os dados de origem</p></div>${icon('clock')}</div>${state.analyses.length?state.analyses.slice(0,3).map(a=>`<button class="activity" data-action="analysis-view" data-id="${a.id}"><span class="activity-dot"></span><div><strong>${date(a.createdAt)}</strong><small>${a.result.totalOrders} pedidos · ${a.result.rows.filter(i=>i.risk==='critical').length} ingredientes críticos</small></div>${icon('arrow')}</button>`).join(''):'<p class="muted">Nenhuma análise registrada. Abra Demanda e análise para começar.</p>'}</section></div>`;
+}
+function inventory() {return `<section class="panel"><div class="panel-head"><div><h2>Estoque disponível <span class="count">${state.ingredients.length}</span></h2><p>Use kg e L com até três casas decimais; unidades devem ser inteiras.</p></div></div>${state.ingredients.length?`<div class="table-scroll"><table><thead><tr><th>Ingrediente</th><th>Unidade</th><th>Estoque atual</th><th>Reserva</th><th>Receitas</th><th>Ações</th></tr></thead><tbody>${state.ingredients.map(i=>`<tr><td><strong>${esc(i.name)}</strong></td><td>${i.unit}</td><td>${fmt(i.stock)}</td><td>${fmt(i.safety)}</td><td>${state.recipes.filter(r=>r.items.some(it=>it.ingredientId===i.id)).length}</td><td class="actions">${button('Editar','ingredient-edit',i.id,'text')}${button('Excluir','ingredient-delete',i.id,'text danger-text')}</td></tr>`).join('')}</tbody></table></div>`:empty('Nenhum ingrediente cadastrado','Adicione o primeiro ingrediente para montar suas receitas.')}</section><div class="callout">A análise projeta o consumo, mas não dá baixa no estoque. Atualize o saldo manualmente após a conferência física.</div>`;}
+function menu(r) {return `<div class="recipe-grid">${state.recipes.map(recipe=>{const m=r.menu.find(m=>m.recipeId===recipe.id);return `<article class="panel recipe-card"><div class="recipe-top"><div class="recipe-symbol">${icon('menu')}</div>${badge(recipe.items.length+' ingredientes')}</div><h2>${esc(recipe.name)}</h2><p>Consumo para preparar 1 porção</p><ul>${recipe.items.map(it=>`<li><span>${esc(state.ingredients.find(i=>i.id===it.ingredientId).name)}</span><strong>${fmt(it.quantity)} ${it.unit}</strong></li>`).join('')}</ul><div class="capacity"><span>Capacidade isolada atual</span><strong>${fmt(m.capacity)} porções</strong></div><div class="actions">${button('Editar receita','recipe-edit',recipe.id,'secondary')}${button('Excluir','recipe-delete',recipe.id,'text danger-text')}</div></article>`;}).join('')||empty('Seu cardápio ainda está vazio','Cadastre ingredientes e depois adicione um prato.')}</div><div class="callout">A capacidade de cada prato considera todo o estoque disponível para ele. Capacidades não devem ser somadas quando os pratos compartilham ingredientes; a análise agrega o consumo de todos os pedidos.</div>`;}
+function demand(r) {
+  const last=state.analyses[0];
+  return `<div class="demand-grid"><section class="panel"><div class="panel-head"><div><h2>Quantos pedidos você espera?</h2><p>Estimativa manual para um único serviço.</p></div>${icon('chart')}</div><form id="demand-form">${state.recipes.map(recipe=>`<div class="demand-row"><label for="d-${recipe.id}"><strong>${esc(recipe.name)}</strong><small>${recipe.items.length} ingredientes por porção</small></label><input id="d-${recipe.id}" name="${recipe.id}" type="number" min="0" max="1000000" step="1" required value="${draftDemand[recipe.id]??state.demand[recipe.id]??0}" aria-label="Pedidos estimados de ${esc(recipe.name)}"></div>`).join('')||'<div class="empty"><p>Cadastre ao menos um prato antes de analisar.</p><a href="#cardapio">Abrir cardápio</a></div>'}<div class="form-bottom"><div><span>Total informado</span><strong id="demand-total">${fmt(state.recipes.reduce((n,r)=>n+Number(draftDemand[r.id]??state.demand[r.id]??0),0))} pedidos</strong></div><button class="btn primary" type="submit" ${!state.recipes.length?'disabled':''}>${icon('radar')} Registrar análise</button></div><p class="form-note">Registrar salva a estimativa e cria uma fotografia do estoque e das receitas. Não altera os saldos.</p></form></section><aside class="panel explain-card"><p class="eyebrow">COMO LER O RESULTADO</p><h2>Um cálculo que você pode conferir.</h2><div class="legend-item">${badge('Crítico','critical')}<p>O estoque não cobre os pedidos estimados.</p></div><div class="legend-item">${badge('Atenção','attention')}<p>Os pedidos cabem, mas o saldo fica no limite ou abaixo da reserva.</p></div><div class="legend-item">${badge('Normal','normal')}<p>Os pedidos cabem e o saldo fica acima da reserva.</p></div><div class="callout">Demanda informada por você. Não é uma previsão produzida por IA.</div></aside></div>${last?`<section class="panel analysis-preview"><div class="panel-head"><div><h2>Última análise registrada</h2><p>${date(last.createdAt)} · cálculo local · ${last.result.totalOrders} pedidos</p></div>${button('Abrir resultado','analysis-view',last.id)}</div>${analysisTable(last.result)}</section>`:''}`;
+}
+function analysisTable(r) {return `<div class="table-scroll"><table><thead><tr><th>Ingrediente</th><th>Disponível</th><th>Necessário</th><th>Saldo projetado</th><th>Falta real</th><th>Repor com reserva</th><th>Situação</th></tr></thead><tbody>${r.rows.map(i=>`<tr><td><strong>${esc(i.name)}</strong><small>${i.unit}</small></td><td>${fmt(i.stock)}</td><td>${fmt(i.required)}</td><td class="${i.projected<0?'danger-text':''}">${fmt(i.projected)}</td><td>${fmt(i.shortage)}</td><td>${fmt(i.replenish)}</td><td>${badge(risks[i.risk],i.risk)}</td></tr>`).join('')}</tbody></table></div>`;}
+function proposals() {
+  const items=state.analyses.flatMap(a=>a.proposals.map(p=>({...p,analysis:a})));
+  return `<div class="callout">As propostas pertencem a análises diferentes e podem tratar da mesma necessidade. Não some essas quantidades como uma lista de compras. Aprovação é apenas uma decisão registrada.</div><section class="panel"><div class="panel-head"><div><h2>Propostas de reposição <span class="count">${items.length}</span></h2><p>A quantidade sugerida cobre a falta e recompõe a reserva.</p></div></div>${items.length?`<div class="table-scroll"><table><thead><tr><th>Ingrediente / análise</th><th>Falta real</th><th>Reposição sugerida</th><th>Motivo</th><th>Decisão</th><th>Ações</th></tr></thead><tbody>${items.map(p=>`<tr><td><strong>${esc(p.name)}</strong><button class="table-link" data-action="analysis-view" data-id="${p.analysis.id}">${date(p.analysis.createdAt)}</button></td><td>${fmt(p.shortage)} ${p.unit}</td><td><strong>${fmt(p.quantity)} ${p.unit}</strong></td><td>${p.shortage>0?'Atender pedidos e reserva':'Recompor reserva'}</td><td>${badge(statuses[p.status],p.status==='pending'?'attention':p.status==='approved'?'normal':'neutral')}${p.decisions[0]?`<small>${date(p.decisions[0].at)}</small>`:''}</td><td class="actions">${p.status==='pending'?button('Aprovar','approve',p.id,'small primary')+button('Rejeitar','reject',p.id,'small secondary'):'<span class="muted">Decisão registrada</span>'}</td></tr>`).join('')}</tbody></table></div>`:empty('Nenhuma proposta por enquanto','Registre uma análise com necessidade de reposição.','<a class="btn primary" href="#demanda">Analisar demanda</a>')}</section>`;
+}
+function history() {return `<section class="panel"><div class="panel-head"><div><h2>Análises registradas <span class="count">${state.analyses.length}</span></h2><p>Os resultados permanecem iguais mesmo após editar o estoque ou o cardápio.</p></div></div>${state.analyses.length?`<div class="table-scroll"><table><thead><tr><th>Data e hora</th><th>Pedidos</th><th>Críticos</th><th>Pratos afetados</th><th>Origem</th><th>Ações</th></tr></thead><tbody>${state.analyses.map(a=>`<tr><td><strong>${date(a.createdAt)}</strong><small>${a.id.slice(0,8)}</small></td><td>${fmt(a.result.totalOrders)}</td><td>${a.result.rows.filter(r=>r.risk==='critical').length}</td><td>${a.result.menu.filter(m=>m.atRisk).length}</td><td>${badge('Cálculo local')}</td><td>${button('Ver detalhes','analysis-view',a.id,'text')}</td></tr>`).join('')}</tbody></table></div>`:empty('Nenhuma análise registrada','O histórico aparece aqui depois que você registrar a primeira análise.','<a class="btn primary" href="#demanda">Criar primeira análise</a>')}</section>`;}
+function about() {return `<div class="bottom-grid"><section class="panel content-card"><p class="eyebrow">O PROJETO</p><h2>Conectar estoque à decisão.</h2><p>O Radar de Ruptura cruza ingredientes, receitas e pedidos estimados para mostrar o que pode faltar e quanto repor. Os dados do Bistrô Horizonte são inteiramente fictícios.</p><h3>O que está funcionando</h3><p>Cadastros, cálculo local, propostas com aprovação humana e histórico por fotografia dos dados. Todas as métricas são derivadas dos cadastros.</p><h3>Automação e IA</h3><p>Automações externas ainda não estão conectadas. As explicações usam regras, sem IA generativa. Nenhum dado é enviado a um provedor externo por esta aplicação.</p><h3>Limites desta demonstração</h3><p>Os dados ficam somente neste navegador. Não há conta, sincronização, compra, recebimento de material, baixa automática ou previsão de vendas. Unidades não são convertidas: informe receitas na unidade do ingrediente. A proteção entre abas detecta versões antigas; não substitui um banco de dados transacional.</p></section><section class="panel content-card"><p class="eyebrow">SEUS DADOS DE DEMONSTRAÇÃO</p><h2>Preserve o que você testou.</h2><p>Exporte uma cópia dos cadastros e do histórico antes de limpar o navegador. O arquivo também serve como evidência de uma simulação.</p>${button('Exportar dados em JSON','export','','primary')}<h3>Restaurar o exemplo</h3><p>Restaura ingredientes, receitas e demanda iniciais e remove o histórico deste navegador. Será necessário confirmar essa ação.</p>${button('Restaurar demonstração','reset','','secondary')}${corrupt?`<h3>Arquivo original preservado</h3><p>Exporte o conteúdo que não pôde ser lido antes de restaurar.</p>${button('Exportar arquivo original','export-raw')}`:''}</section></div>`;}
+function dialog(title,body,submitLabel,onSubmit,wide=false) {
+  modal.classList.toggle('wide',wide);
+  document.querySelector('#modal-content').innerHTML=`<div class="modal-head"><div><p class="eyebrow">RADAR DE RUPTURA</p><h2 id="modal-title">${esc(title)}</h2></div><button class="close" type="button" data-action="close" aria-label="Fechar janela">×</button></div><div class="modal-body">${body}<p id="modal-error" class="form-error" role="alert"></p></div><div class="modal-foot">${button(onSubmit?'Cancelar':'Fechar','close')}${onSubmit?`<button class="btn primary" type="submit">${esc(submitLabel)}</button>`:''}</div>`;
+  submitModal=onSubmit; modal.showModal();
+}
+const field=(label,name,value='',extra='')=>`<label class="field">${label}<input name="${name}" value="${esc(value)}" ${extra}></label>`;
+function ingredientForm(id) {
+  const original=state.ingredients.find(i=>i.id===id),i=original??{name:'',unit:'un',stock:0,safety:0};
+  const used=original && state.recipes.some(r=>r.items.some(it=>it.ingredientId===id));
+  dialog(original?'Editar ingrediente':'Novo ingrediente',`${field('Nome do ingrediente','name',i.name,'required maxlength="80"')}<label class="field">Unidade<select name="unit" ${used?'disabled':''}>${['un','kg','L'].map(u=>`<option ${i.unit===u?'selected':''}>${u}</option>`).join('')}</select></label>${used?'<p class="form-note">Para mudar a unidade, remova primeiro os vínculos nas receitas.</p>':''}<div class="field-grid">${field('Estoque disponível','stock',i.stock,'required inputmode="decimal"')}${field('Reserva de segurança','safety',i.safety,'required inputmode="decimal"')}</div><p class="form-note">Até três casas decimais em kg e L. Unidades inteiras. Use ponto ou vírgula como separador decimal, sem separador de milhar.</p>`,'Salvar ingrediente',data=>{
+    const unit=used?i.unit:data.get('unit');
+    const entry={id:original?.id??uid(),name:text(data.get('name')),unit,stock:quantity(data.get('stock'),unit,'Estoque')/1000,safety:quantity(data.get('safety'),unit,'Reserva')/1000};
+    const next=clone(state);original?next.ingredients.splice(next.ingredients.findIndex(i=>i.id===id),1,entry):next.ingredients.push(entry);
+    commit(next,'Ingrediente salvo.');
+  });
+}
+function recipeForm(id) {
+  if (!state.ingredients.length) {toast('Cadastre ao menos um ingrediente primeiro.');location.hash='estoque';return;}
+  const original=state.recipes.find(r=>r.id===id),r=original??{name:'',items:[]};
+  dialog(original?'Editar receita':'Novo prato',`${field('Nome do prato','name',r.name,'required maxlength="80"')}<h3>Consumo por porção</h3><p class="form-note">Deixe zero para ingredientes que não fazem parte da receita.</p>${state.ingredients.map(i=>field(`${esc(i.name)} <span class="muted">(${i.unit})</span>`,`q-${i.id}`,r.items.find(it=>it.ingredientId===i.id)?.quantity??0,'required inputmode="decimal"')).join('')}`,'Salvar receita',data=>{
+    const entry={id:original?.id??uid(),name:text(data.get('name')),items:state.ingredients.map(i=>({ingredientId:i.id,quantity:quantity(data.get(`q-${i.id}`),i.unit,'Consumo de '+i.name)/1000,unit:i.unit})).filter(i=>i.quantity>0)};
+    if (!entry.items.length) throw new Error('Inclua ao menos um ingrediente com consumo maior que zero.');
+    const next=clone(state);original?next.recipes.splice(next.recipes.findIndex(r=>r.id===id),1,entry):next.recipes.push(entry);if(!original){next.demand[entry.id]=0;draftDemand[entry.id]=0;}
+    commit(next,'Receita salva.');
+  });
+}
+function showAnalysis(id) {
+  const a=state.analyses.find(a=>a.id===id);if(!a)return;
+  dialog('Resultado da análise',`<p class="muted">${date(a.createdAt)} · ${a.id.slice(0,8)} · cálculo local</p><p>${esc(explain(a.result))}</p>${analysisTable(a.result)}<h3>Pratos e capacidade</h3><p class="form-note">Capacidade isolada: pressupõe que todo o estoque é destinado ao prato. Não some capacidades de pratos com ingredientes compartilhados.</p><div class="table-scroll"><table><thead><tr><th>Prato</th><th>Demanda informada</th><th>Capacidade isolada</th><th>Risco por ingrediente</th></tr></thead><tbody>${a.result.menu.map(m=>`<tr><td>${esc(m.name)}</td><td>${m.demand}</td><td>${m.capacity}</td><td>${m.atRisk?'Sim':'Não'}</td></tr>`).join('')}</tbody></table></div><h3>Dados preservados</h3><p class="form-note">Estoques, reservas, receitas e demanda são da data desta análise.</p><details><summary>Consultar receitas usadas no cálculo</summary>${a.snapshot.recipes.map(r=>`<p><strong>${esc(r.name)}</strong>: ${r.items.map(it=>`${fmt(it.quantity)} ${it.unit} de ${esc(a.snapshot.ingredients.find(i=>i.id===it.ingredientId).name)}`).join('; ')}.</p>`).join('')}</details><div class="callout">${a.proposals.length} proposta(s) gerada(s). Revise a aprovação na seção Reposições. Repor com reserva inclui a falta real e a reserva configurada.</div>`,'',null,true);
+}
+function download(content,name) {const blob=new Blob([content],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-action]');if(!b)return;
+  try {
+    const id=b.dataset.id;
+    switch(b.dataset.action){
+      case 'close':modal.close();break;
+      case 'ingredient-new':ingredientForm();break;
+      case 'ingredient-edit':ingredientForm(id);break;
+      case 'recipe-new':recipeForm();break;
+      case 'recipe-edit':recipeForm(id);break;
+      case 'analysis-view':showAnalysis(id);break;
+      case 'ingredient-delete': {
+        removeIngredient(state,id);
+        dialog('Excluir ingrediente?',`<p>O ingrediente <strong>${esc(state.ingredients.find(i=>i.id===id).name)}</strong> será removido do cadastro. As análises anteriores permanecem preservadas.</p>`,'Excluir ingrediente',()=>commit(removeIngredient(state,id),'Ingrediente excluído.'));break;
+      }
+      case 'recipe-delete':dialog('Excluir prato?',`<p>O prato <strong>${esc(state.recipes.find(r=>r.id===id).name)}</strong> e sua estimativa atual serão removidos. O histórico permanece preservado.</p>`,'Excluir prato',()=>{commit(removeRecipe(state,id),'Prato excluído.');delete draftDemand[id];});break;
+      case 'approve':case 'reject': {
+        const status=b.dataset.action==='approve'?'approved':'rejected';
+        const proposal=state.analyses.flatMap(a=>a.proposals).find(p=>p.id===id);
+        dialog(status==='approved'?'Aprovar reposição?':'Rejeitar reposição?',`<p><strong>${fmt(proposal.quantity)} ${proposal.unit} de ${esc(proposal.name)}</strong>.</p><p>Esta decisão ficará registrada e não poderá ser alterada nesta demonstração. Não realiza uma compra nem muda o estoque.</p>`,status==='approved'?'Confirmar aprovação':'Confirmar rejeição',()=>commit(decide(state,id,status),'Decisão registrada. Estoque preservado.'));break;
+      }
+      case 'export':download(JSON.stringify(state,null,2),'radar-de-ruptura-dados.json');toast('Cópia exportada.');break;
+      case 'export-raw':download(localStorage.getItem(STORAGE_KEY)??'null','radar-de-ruptura-original.json');break;
+      case 'reset':dialog('Restaurar os dados de exemplo?',`<p>Isso apaga os cadastros alterados e todo o histórico deste navegador. Exporte os dados antes de continuar.</p><label class="checkbox"><input type="checkbox" name="confirm" required> Entendo que meus dados de demonstração serão substituídos.</label>`,'Restaurar demonstração',()=>{const next=demo();if(corrupt){localStorage.setItem(STORAGE_KEY,JSON.stringify(next));state=next;corrupt=false;}else{state=save(localStorage,next,state.revision);}draftDemand={...state.demand};render();toast('Dados fictícios restaurados.');});break;
+    }
+  }catch(error){toast(error.message);}
+});
+modalForm.addEventListener('submit',e=>{e.preventDefault();if(!submitModal)return;try{submitModal(new FormData(modalForm));modal.close();}catch(error){document.querySelector('#modal-error').textContent=error.message;}});
+document.addEventListener('submit',e=>{if(e.target.id!=='demand-form')return;e.preventDefault();try{const data=new FormData(e.target),next=clone(state);next.demand=Object.fromEntries(state.recipes.map(r=>[r.id,orders(data.get(r.id))]));const analysis=newAnalysis(next);next.analyses.unshift(analysis);commit(next,'Análise registrada.');draftDemand={...next.demand};render();showAnalysis(analysis.id);}catch(error){toast(error.message);}});
+document.addEventListener('input',e=>{if(e.target.closest('#demand-form')){draftDemand[e.target.name]=e.target.value;document.querySelector('#demand-total').textContent=fmt(state.recipes.reduce((n,r)=>n+(Number(draftDemand[r.id])||0),0))+' pedidos';}});
+window.addEventListener('hashchange',()=>{render();document.querySelector('#main').focus();});
+window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY)toast('Dados alterados em outra aba. Recarregue esta página antes de editar.');});
+render();
+</script></body>
+</html>
