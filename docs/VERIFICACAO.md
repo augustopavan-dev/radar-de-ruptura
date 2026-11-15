@@ -26,7 +26,7 @@ Os três testes do adaptador futuro usam dublês locais. Não representam chamad
 | Segurança do frontend | Escape de dados, validação de entradas e CSP no HTML gerado |
 | Integração automática HTTP | Não implementada; plano em INTEGRACAO_N8N.md |
 
-A revisão final da interface publicada está em andamento nesta atualização; os resultados serão registrados depois da implantação. Não há teste em restaurante real, medição de impacto ou auditoria independente.
+Em 15/11/2026, a demonstração publicada foi aberta no Chrome. Foram inspecionados dashboard, demanda, tabela com falta de 4 pães, reposições, histórico e diálogo de análise com botão de exportação n8n. As capturas reais estão em images/. Essa revisão confirma os estados observados; não representa cobertura completa de CRUD, download, navegação por teclado, leitores de tela ou todos os tamanhos de tela. Não há teste em restaurante real, medição de impacto ou auditoria independente.
 
 ## Limitações assumidas
 

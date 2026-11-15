@@ -15,7 +15,7 @@ O gerador `build-automation.mjs` incorpora `src/engine.mjs` e `src/automation.mj
 
 ## Como usar a instância já configurada
 
-1. No Radar, entre em **Histórico** e abra **Ver análise**.
+1. No Radar, entre em **Histórico** e abra **Ver detalhes**.
 2. Clique em **Exportar análise para n8n**. Abra o arquivo JSON baixado com o Bloco de Notas e copie seu conteúdo.
 3. Na sua instância n8n, abra **Radar de Ruptura — revisão operacional** e dê dois cliques em **Dados da análise**.
 4. Mantenha **Modo: JSON** e **Fixo / Fixed**. Substitua todo o JSON do exemplo pelo conteúdo copiado, sem transformá-lo em expressão.

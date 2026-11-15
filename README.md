@@ -1,16 +1,32 @@
 # Radar de Ruptura
 
-Um restaurante pode ter carne suficiente e perder pedidos por falta de pães. O Radar cruza estoque, receitas e demanda informada para identificar a falta antes do atendimento e organizar reposições para revisão humana.
+Sistema web para antecipar a falta de ingredientes a partir do estoque, das receitas e da demanda estimada, com propostas de reposição e revisão humana.
 
-**[Abrir demonstração](https://augustopavan-dev.github.io/radar-de-ruptura/)** · [Verificações](docs/VERIFICACAO.md) · [Automação n8n](docs/INTEGRACAO_N8N.md) · [Segurança](SECURITY.md)
+**[Experimentar a demonstração →](https://augustopavan-dev.github.io/radar-de-ruptura/)**
 
-Projeto independente de portfólio de Augusto Pavan Ribeiro, desenvolvido com assistência de IA, sem vínculo com o iFood. Bistrô Horizonte e seus dados são fictícios.
+JavaScript nativo · n8n · GitHub Pages · 36 testes aprovados
 
-## Estado atual
+![Dashboard do Radar com indicadores e prioridades do serviço](docs/images/dashboard.jpg)
 
-A demonstração está publicada no GitHub Pages. O núcleo, a persistência, o empacotamento e o contrato de automação possuem 36 testes automatizados. Uma automação foi configurada e executada de verdade no n8n Cloud, com dados fictícios, sem credenciais e sem APIs pagas.
+*Interface real da demonstração, com dados fictícios do Bistrô Horizonte.*
 
-O envio ao n8n é **manual**: abra uma análise no Histórico, exporte seu JSON e cole no workflow autenticado. Depois do início manual, o workflow valida, recalcula, prioriza e prepara o relatório. Não existe conexão automática entre Pages e n8n. O aplicativo continua funcionando sem o n8n.
+## O problema
+
+Ter saldo de cada ingrediente não garante que o restaurante consiga atender o cardápio previsto. Um ingrediente compartilhado pode limitar vários pratos, e olhar cada receita separadamente pode contar o mesmo estoque mais de uma vez.
+
+O Radar soma o consumo de todas as receitas para a demanda informada, distingue falta real de reserva de segurança e deixa a decisão de reposição com o responsável. É um projeto de portfólio, sem uso produtivo ou impacto comercial medido.
+
+## A solução em poucos passos
+
+1. Cadastre ingredientes e o consumo por porção nas receitas.
+2. Informe a estimativa de pedidos do serviço.
+3. Registre uma análise para conferir falta, risco e reposição sugerida.
+4. Revise as propostas; aprove ou rejeite sem movimentar estoque.
+5. Consulte a fotografia histórica ou exporte uma análise para o workflow n8n.
+
+**Escopo:** os cálculos e as explicações são determinísticos. O n8n foi executado de verdade, mas recebe o JSON por transferência manual. Não há IA generativa, webhook ou previsão automática de vendas.
+
+[Verificações](docs/VERIFICACAO.md) · [Guia n8n](docs/INTEGRACAO_N8N.md) · [Segurança](SECURITY.md) · [Apresentação do projeto](docs/APRESENTACAO.md)
 
 ## Funcionalidades
 
@@ -25,7 +41,7 @@ O envio ao n8n é **manual**: abra uma análise no Histórico, exporte seu JSON 
 
 As explicações usam regras determinísticas. Não há IA generativa ou previsão estatística de vendas.
 
-## Cenário de referência
+## Exemplo: faltam 4 pães
 
 | Ingrediente | Disponível | Por X-Burger | Pedidos | Necessário | Falta |
 | --- | --- | --- | --- | --- | --- |
@@ -45,9 +61,65 @@ Saldo negativo é crítico; de zero até a reserva, inclusive, é atenção; aci
 
 Kg e L aceitam até três casas decimais; unidades e pedidos exigem inteiros. O cálculo usa milésimos inteiros. A receita deve usar a unidade do ingrediente, sem conversão automática. Capacidades são isoladas e não podem ser somadas quando há ingredientes compartilhados.
 
-## Executar e testar
+![Demanda estimada e resultado com falta de quatro pães](docs/images/analise.jpg)
 
-Requer Node.js 22 ou superior, sem dependências para instalar:
+*Análise registrada: 12 X-Burgers exigem 12 pães; o saldo disponível é 8.*
+
+![Propostas de reposição com decisão pendente e decisões anteriores](docs/images/reposicoes.jpg)
+
+*Cada proposta pertence a uma análise. Aprovar registra uma decisão; não compra nem altera estoque.*
+
+## Automação com n8n
+
+O workflow recebe a fotografia de uma análise exportada, valida os dados, recalcula a necessidade e prepara um relatório com propostas pendentes, priorizando a falta real antes da reserva. Usa as mesmas fontes de cálculo do aplicativo.
+
+![Workflow n8n com quatro nós e execução concluída](docs/images/n8n-workflow.jpg)
+
+*Captura real de uma execução bem-sucedida. Os quatro nós usam gatilho manual, Edit Fields e Code; não há API paga.*
+
+O envio é manual pelo editor autenticado: exportar JSON → colar em **Dados da análise** → executar → revisar a saída. O resultado não retorna automaticamente ao Radar. O workflow é [importável](automations/radar-n8n-workflow.json); o [guia](docs/INTEGRACAO_N8N.md) detalha uso, contrato e plano de integração futura.
+
+## Tecnologias e arquitetura
+
+| Tecnologia | Uso |
+| --- | --- |
+| JavaScript com módulos nativos | Interface, regras e validação |
+| HTML e CSS | Estrutura semântica e layout responsivo |
+| LocalStorage | Cadastros, análises e decisões no navegador |
+| Node.js e node:test | Servidor local, build e testes sem dependências |
+| n8n Cloud | Validação e revisão operacional após envio manual |
+| GitHub Pages | Hospedagem estática da demonstração |
+
+```mermaid
+flowchart TD
+  U["Estoque, receitas e demanda"] --> C["Cálculo determinístico"]
+  C --> H["Histórico e propostas locais"]
+  H --> D["Decisão humana"]
+  H --> J["Exportação JSON"]
+  J -->|"Transferência manual"| N["Workflow n8n"]
+  N --> R["Relatório para revisão"]
+```
+
+O navegador executa as regras e salva fotografias históricas. O Pages entrega os arquivos; não processa dados no servidor. O n8n recalcula o pacote recebido e produz outro relatório, sem escrever no aplicativo. Uma conexão automática exigiria backend autenticado para proteger credenciais.
+
+## Testes e validação
+
+**36 testes aprovados, sem falhas**, no relatório [registrado](docs/testes-executados.txt). A cobertura inclui precisão decimal, consumo compartilhado, reservas, referências inválidas, persistência, conflitos entre abas e contrato da automação.
+
+O autor confirmou manualmente a falta de 4 pães, a aprovação sem alterar estoque e o histórico após atualizar. No n8n Cloud foram verificados sucesso, estoque suficiente e rejeição de estoque negativo. Os testes do adaptador futuro usam dublês locais e não representam integração HTTP.
+
+Consulte a [matriz de evidências e limites](docs/VERIFICACAO.md). As capturas acima foram feitas na aplicação publicada; não são protótipos.
+
+## Executar localmente
+
+Requer Node.js 22 ou superior e Git. No terminal:
+
+```text
+git clone https://github.com/augustopavan-dev/radar-de-ruptura.git
+cd radar-de-ruptura
+```
+
+Não há dependências para instalar. Inicie com:
 
 ```text
 node server.mjs
@@ -85,6 +157,17 @@ O período de avaliação do n8n Cloud não é um plano gratuito permanente. O w
 
 A integração automática permanece uma etapa futura: exige backend autenticado e proteção de segredos. O [plano](docs/INTEGRACAO_N8N.md) define essa arquitetura e seus critérios de aceite.
 
-## Autoria
+## Próximas melhorias
+
+- Importação de backup com validação e confirmação de substituição.
+- Testes de interface automatizados e ampliação da avaliação de acessibilidade.
+- Backend autenticado para integração automática com n8n.
+- Validação do problema e do fluxo com pessoas que operam restaurantes.
+
+São etapas planejadas, sem prazo ou resultado prometido.
+
+## Autoria e contexto do portfólio
+
+Projeto independente de **Augusto Pavan Ribeiro**, preparado como material de portfólio para a candidatura a AI Builder — Programa GenAI 2027 do iFood, sem vínculo ou endosso da empresa. Bistrô Horizonte e seus dados são fictícios.
 
 Augusto forneceu o contexto, os requisitos e realizou os testes manuais informados na documentação. Implementação, correções e testes foram produzidos com assistência de IA. Não foram medidos resultados em restaurantes reais nem estimadas economias sem evidência.
