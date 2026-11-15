@@ -1,113 +1,90 @@
 # Radar de Ruptura
 
-Um restaurante pode ter carne suficiente para o serviço e não conseguir atender os pedidos porque faltam pães. O Radar de Ruptura relaciona estoque, receitas e demanda informada para identificar esse problema antes do atendimento e organizar propostas de reposição.
+Um restaurante pode ter carne suficiente e perder pedidos por falta de pães. O Radar cruza estoque, receitas e demanda informada para identificar a falta antes do atendimento e organizar reposições para revisão humana.
 
-Projeto independente de portfólio de Augusto Pavan Ribeiro, desenvolvido com assistência de IA. Não possui vínculo com o iFood. O restaurante **Bistrô Horizonte** e todos os dados de exemplo são fictícios.
+**[Abrir demonstração](https://augustopavan-dev.github.io/radar-de-ruptura/)** · [Verificações](docs/VERIFICACAO.md) · [Automação n8n](docs/INTEGRACAO_N8N.md) · [Segurança](SECURITY.md)
 
-## Estado da versão
+Projeto independente de portfólio de Augusto Pavan Ribeiro, desenvolvido com assistência de IA, sem vínculo com o iFood. Bistrô Horizonte e seus dados são fictícios.
 
-O núcleo local possui testes automáticos para regras de cálculo, validação, propostas, histórico e persistência. A publicação está sendo preparada no GitHub Pages. Consulte [VERIFICACAO.md](docs/VERIFICACAO.md) para distinguir testes executados de verificações pendentes.
+## Estado atual
 
-As explicações operacionais são feitas por regras. Não há IA generativa, previsão estatística de vendas ou workflow n8n conectado. Nenhuma compra é realizada pelo aplicativo.
+A demonstração está publicada no GitHub Pages. O núcleo, a persistência, o empacotamento e o contrato de automação possuem 36 testes automatizados. Uma automação foi configurada e executada de verdade no n8n Cloud, com dados fictícios, sem credenciais e sem APIs pagas.
 
-## O que o aplicativo faz
+O envio ao n8n é **manual**: abra uma análise no Histórico, exporte seu JSON e cole no workflow autenticado. Depois do início manual, o workflow valida, recalcula, prioriza e prepara o relatório. Não existe conexão automática entre Pages e n8n. O aplicativo continua funcionando sem o n8n.
 
-- Cadastra ingredientes, saldos, unidades e reservas de segurança.
-- Cadastra pratos e o consumo de ingredientes por porção.
-- Recebe uma estimativa manual de pedidos por prato.
-- Soma a necessidade dos ingredientes compartilhados entre todas as receitas.
-- Mostra risco, saldo projetado, falta real e reposição para recompor a reserva.
-- Gera propostas com revisão humana e decisões registradas.
-- Preserva a fotografia dos dados usados em cada análise.
-- Exporta os dados em JSON e restaura o exemplo após confirmação.
+## Funcionalidades
 
-Os dados ficam somente no navegador de quem usa a demonstração. Não há sincronização entre visitantes ou acesso a um estoque real.
+- Ingredientes com saldo, unidade e reserva de segurança.
+- Receitas com consumo por porção e ingredientes compartilhados.
+- Demanda estimada informada pela pessoa usuária.
+- Falta real, saldo projetado, risco e reposição para recompor a reserva.
+- Propostas com aprovação ou rejeição humana, sem compras ou alteração de estoque.
+- Histórico com fotografia dos dados usados na análise.
+- Exportação completa para consulta e exportação de uma análise para n8n.
+- Persistência local e detecção de revisões desatualizadas entre abas.
 
-## Experimente o cenário obrigatório
+As explicações usam regras determinísticas. Não há IA generativa ou previsão estatística de vendas.
 
-Na seção **Demanda e análise**, registre os pedidos de exemplo:
+## Cenário de referência
 
-| Item | Estoque | Consumo por X-Burger | Demanda |
-| --- | --- | --- | --- |
-| Pão de hambúrguer | 8 un | 1 un | 12 X-Burgers |
-| Hambúrguer bovino | 15 un | 1 un | 12 X-Burgers |
+| Ingrediente | Disponível | Por X-Burger | Pedidos | Necessário | Falta |
+| --- | --- | --- | --- | --- | --- |
+| Pão | 8 un | 1 un | 12 | 12 un | **4 un** |
+| Carne | 15 un | 1 un | 12 | 12 un | 0 un |
 
-Com reserva zero, o resultado esperado é necessidade de 12 pães, **falta de 4 pães**, pão crítico, carne normal e capacidade isolada de **8 X-Burgers**. A fixture automatizada usa somente pão e carne; o conjunto visual inclui queijo e outros pratos para demonstrar mais situações.
-
-## Regras verificáveis
+Com reserva zero, pão é crítico, carne é normal e a capacidade isolada é 8 X-Burgers. O exemplo visual inclui queijo e outros pratos.
 
 ```text
-necessário = soma(consumo por prato × pedidos estimados)
-saldo projetado = estoque disponível − necessário
-falta real = máximo(0, necessário − estoque disponível)
-reposição sugerida = máximo(0, necessário + reserva − estoque disponível)
+necessário = soma(consumo por prato × pedidos)
+saldo projetado = estoque - necessário
+falta real = máximo(0, necessário - estoque)
+reposição = máximo(0, necessário + reserva - estoque)
 ```
 
-| Situação | Regra |
-| --- | --- |
-| Crítico | Saldo projetado menor que zero |
-| Atenção | Saldo projetado entre zero e a reserva, inclusive |
-| Normal | Saldo projetado maior que a reserva |
+Saldo negativo é crítico; de zero até a reserva, inclusive, é atenção; acima da reserva é normal. Não se cria proposta de quantidade zero. Demanda zero pode gerar reposição se a reserva estiver insuficiente.
 
-A igualdade exata com a reserva é atenção, mas pode ter reposição zero. Não são criadas propostas de quantidade zero. Demanda zero não consome estoque; uma reserva insuficiente ainda pode gerar proposta.
-
-Quantidades são calculadas em milésimos inteiros para evitar erros como 0,1 + 0,2 no limite da reserva. Kg e L aceitam até três casas decimais; un e pedidos exigem inteiros. A receita usa a mesma unidade do ingrediente. Não há conversão automática de g para kg ou mL para L.
-
-A capacidade de um prato é **isolada**: considera dedicar a ele todo o estoque. Capacidades não são somáveis quando os pratos compartilham ingredientes. A aplicação aponta o risco agregado, sem escolher quais pedidos atender primeiro.
+Kg e L aceitam até três casas decimais; unidades e pedidos exigem inteiros. O cálculo usa milésimos inteiros. A receita deve usar a unidade do ingrediente, sem conversão automática. Capacidades são isoladas e não podem ser somadas quando há ingredientes compartilhados.
 
 ## Executar e testar
 
-É possível abrir `Radar_de_Ruptura.html` diretamente no navegador. Algumas configurações de navegador podem limitar o armazenamento em arquivos locais; o servidor é a alternativa recomendada nesses casos.
-
-Com Node.js 22 ou superior, na pasta do projeto:
+Requer Node.js 22 ou superior, sem dependências para instalar:
 
 ```text
 node server.mjs
 ```
 
-Abra o endereço local mostrado no terminal. Para reconstruir a página independente e a entrada do GitHub Pages e executar os testes:
+Abra o endereço mostrado no terminal. Também é possível abrir `Radar_de_Ruptura.html`; o armazenamento de arquivos locais depende das regras do navegador.
 
 ```text
 node build-standalone.mjs
-node --test tests/core.test.mjs tests/standalone.test.mjs
+node build-automation.mjs
+node --test tests/core.test.mjs tests/automation.test.mjs tests/standalone.test.mjs
 ```
 
-Não há dependências para instalar. O relatório da execução acompanha o projeto em `docs/testes-executados.txt`.
-
-## Tecnologias e organização
-
-- JavaScript com módulos nativos, HTML e CSS responsivo.
-- Node.js para testes, empacotamento e servidor estático opcional.
-- LocalStorage para dados da demonstração.
-- GitHub Pages para distribuição estática, sem backend.
+O build gera `docs/index.html`, o HTML independente e o workflow com as mesmas regras das fontes. Não edite os arquivos gerados manualmente. Pages publica a branch `main`, pasta `/docs`.
 
 | Arquivo | Responsabilidade |
 | --- | --- |
-| `src/engine.mjs` | Regras de cálculo, precisão e validação |
+| `src/engine.mjs` | Cálculo, unidades e validação |
 | `src/model.mjs` | Fotografias históricas e decisões |
-| `src/storage.mjs` | Persistência e detecção de revisão desatualizada |
-| `src/app.mjs` | Interface e interações |
-| `src/integrations.mjs` | Ponto de extensão e fallback, sem conexão externa |
-| `tests/` | Testes do núcleo e do empacotamento |
-| `docs/index.html` | Página gerada para publicação |
+| `src/storage.mjs` | Persistência e revisão entre abas |
+| `src/automation.mjs` | Pacote mínimo, validação e processamento |
+| `src/app.mjs` | Interface e exportação |
+| `src/integrations.mjs` | Adaptador futuro e fallback, testado com dublês |
+| `automations/radar-n8n-workflow.json` | Workflow importável sem credenciais |
+| `automations/example-analysis.json` | Entrada fictícia de exemplo |
+| `docs/testes-executados.txt` | Resultado bruto dos testes |
 
-O build gera o HTML público a partir das fontes. Não edite `docs/index.html` manualmente. Configure o Pages para publicar da branch `main`, pasta `/docs`; o arquivo `.nojekyll` indica distribuição estática.
+## Limites e continuidade
 
-## Limitações importantes
+Dados ficam no navegador, sem autenticação no aplicativo, banco remoto, sincronização ou integração com estoque real. Limpar dados do site pode apagar o histórico; exporte antes. A exportação completa é uma cópia de consulta; importação ainda não existe.
 
-- Não há autenticação, múltiplos usuários, banco remoto ou sincronização.
-- O navegador pode remover seus dados locais. Exporte antes de limpar o armazenamento.
-- O JSON exportado serve como cópia de consulta; a importação ainda não foi implementada.
-- Aprovar não compra, não recebe material e não altera o estoque.
-- Propostas de análises diferentes podem representar a mesma necessidade e não são uma lista consolidada de compras.
-- A detecção de revisão antiga entre abas não substitui transações de um banco de dados.
-- Não há lotes, validade, fornecedores, custos, prazos de entrega ou otimização de alocação entre pratos.
-- Os testes do adaptador usam dublês locais; não comprovam uma integração n8n real.
+Aprovar não compra, recebe material ou altera estoque. Propostas de análises diferentes podem repetir a mesma necessidade. Não há fornecedores, custos, validade, lotes, prazos ou otimização da alocação entre pratos.
 
-## Próximas etapas
+O período de avaliação do n8n Cloud não é um plano gratuito permanente. O workflow exportado permite continuidade em uma instalação própria; hospedagem própria pode ter custos e não foi instalada neste trabalho. Nenhuma assinatura ou API paga foi contratada.
 
-Completar a validação visual e dos fluxos publicados, registrar capturas reais e testar com pessoas usuárias. Uma futura automação com n8n exigirá backend autenticado, segredos no servidor e testes reais de sucesso e falha. O [contrato proposto](docs/INTEGRACAO_N8N.md) documenta essa separação. Chamadas diretas do navegador para um webhook secreto não fazem parte deste desenho.
+A integração automática permanece uma etapa futura: exige backend autenticado e proteção de segredos. O [plano](docs/INTEGRACAO_N8N.md) define essa arquitetura e seus critérios de aceite.
 
-## Autoria e aprendizado
+## Autoria
 
-O contexto e os requisitos do projeto foram fornecidos por Augusto. A implementação inicial e os testes automáticos foram produzidos com assistência de IA. As contribuições e validações posteriores devem ser descritas conforme o trabalho efetivamente realizado. Não foram medidos resultados em restaurantes reais nem estimadas economias sem evidência.
+Augusto forneceu o contexto, os requisitos e realizou os testes manuais informados na documentação. Implementação, correções e testes foram produzidos com assistência de IA. Não foram medidos resultados em restaurantes reais nem estimadas economias sem evidência.

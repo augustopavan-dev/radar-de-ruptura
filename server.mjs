@@ -1,6 +1,6 @@
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
-const allowed = new Set(['index.html','style.css','src/app.mjs','src/engine.mjs','src/model.mjs','src/storage.mjs','src/integrations.mjs']);
+const allowed = new Set(['index.html','style.css','src/app.mjs','src/engine.mjs','src/model.mjs','src/storage.mjs','src/automation.mjs','src/integrations.mjs']);
 const types = {html:'text/html; charset=utf-8',css:'text/css; charset=utf-8',mjs:'text/javascript; charset=utf-8'};
 const server = createServer(async (req,res) => {
   const headers = {'Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Cache-Control':'no-store'};
