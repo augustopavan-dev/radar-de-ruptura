@@ -4,7 +4,7 @@ export const MAX_QUANTITY = 1000000;
 export const MAX_ORDERS = 1000000;
 export function quantity(value, unit = 'kg', label = 'Quantidade') {
   if (typeof value !== 'number' && typeof value !== 'string') throw new Error(`${label}: informe um número.`);
-  if (typeof value === 'string' && !/^\d+(?:[.,]\d{1,3})?$/.test(value.trim())) throw new Error(`${label}: use um número positivo com até três casas decimais.`);
+  if (!/^\d+(?:[.,]\d{1,3})?$/.test(String(value).trim())) throw new Error(`${label}: use um número positivo com até três casas decimais.`);
   const n = Number(String(value).trim().replace(',', '.'));
   if (!Number.isFinite(n) || n < 0 || n > MAX_QUANTITY) throw new Error(`${label}: informe de 0 a 1.000.000.`);
   const scaled = Math.round(n * 1000);

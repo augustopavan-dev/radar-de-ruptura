@@ -1,0 +1,118 @@
+{
+  "name": "Radar de Ruptura — revisão operacional",
+  "active": false,
+  "nodes": [
+    {
+      "id": "manual",
+      "name": "Iniciar revisão",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "input",
+      "name": "Dados da análise",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"schemaVersion\": 1,\n  \"origin\": \"radar-de-ruptura\",\n  \"analysisId\": \"exemplo-x-burger\",\n  \"createdAt\": \"2026-11-15T12:00:00.000Z\",\n  \"snapshot\": {\n    \"ingredients\": [\n      {\n        \"id\": \"pao\",\n        \"name\": \"Pão de hambúrguer\",\n        \"unit\": \"un\",\n        \"stock\": 8,\n        \"safety\": 0\n      },\n      {\n        \"id\": \"carne\",\n        \"name\": \"Hambúrguer bovino\",\n        \"unit\": \"un\",\n        \"stock\": 15,\n        \"safety\": 0\n      },\n      {\n        \"id\": \"queijo\",\n        \"name\": \"Queijo muçarela\",\n        \"unit\": \"kg\",\n        \"stock\": 0.6,\n        \"safety\": 0.2\n      },\n      {\n        \"id\": \"batata\",\n        \"name\": \"Batata pré-frita\",\n        \"unit\": \"kg\",\n        \"stock\": 3,\n        \"safety\": 1\n      },\n      {\n        \"id\": \"oleo\",\n        \"name\": \"Óleo vegetal\",\n        \"unit\": \"L\",\n        \"stock\": 2,\n        \"safety\": 0.5\n      },\n      {\n        \"id\": \"alface\",\n        \"name\": \"Alface higienizada\",\n        \"unit\": \"kg\",\n        \"stock\": 0.5,\n        \"safety\": 0.1\n      }\n    ],\n    \"recipes\": [\n      {\n        \"id\": \"burger\",\n        \"name\": \"X-Burger\",\n        \"items\": [\n          {\n            \"ingredientId\": \"pao\",\n            \"quantity\": 1,\n            \"unit\": \"un\"\n          },\n          {\n            \"ingredientId\": \"carne\",\n            \"quantity\": 1,\n            \"unit\": \"un\"\n          },\n          {\n            \"ingredientId\": \"queijo\",\n            \"quantity\": 0.025,\n            \"unit\": \"kg\"\n          }\n        ]\n      },\n      {\n        \"id\": \"fritas\",\n        \"name\": \"Porção de fritas\",\n        \"items\": [\n          {\n            \"ingredientId\": \"batata\",\n            \"quantity\": 0.25,\n            \"unit\": \"kg\"\n          },\n          {\n            \"ingredientId\": \"oleo\",\n            \"quantity\": 0.03,\n            \"unit\": \"L\"\n          }\n        ]\n      },\n      {\n        \"id\": \"salada\",\n        \"name\": \"Salada do bistrô\",\n        \"items\": [\n          {\n            \"ingredientId\": \"alface\",\n            \"quantity\": 0.1,\n            \"unit\": \"kg\"\n          },\n          {\n            \"ingredientId\": \"queijo\",\n            \"quantity\": 0.025,\n            \"unit\": \"kg\"\n          }\n        ]\n      }\n    ],\n    \"demand\": {\n      \"burger\": 12,\n      \"fritas\": 8,\n      \"salada\": 4\n    }\n  }\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "review",
+      "name": "Validar e preparar reposições",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Quantidades são calculadas em milésimos inteiros, evitando erros de ponto flutuante.\nconst UNITS = ['un', 'kg', 'L'];\nconst MAX_QUANTITY = 1000000;\nconst MAX_ORDERS = 1000000;\nfunction quantity(value, unit = 'kg', label = 'Quantidade') {\n  if (typeof value !== 'number' && typeof value !== 'string') throw new Error(`${label}: informe um número.`);\n  if (!/^\\d+(?:[.,]\\d{1,3})?$/.test(String(value).trim())) throw new Error(`${label}: use um número positivo com até três casas decimais.`);\n  const n = Number(String(value).trim().replace(',', '.'));\n  if (!Number.isFinite(n) || n < 0 || n > MAX_QUANTITY) throw new Error(`${label}: informe de 0 a 1.000.000.`);\n  const scaled = Math.round(n * 1000);\n  if (Math.abs(n * 1000 - scaled) > 0.000001) throw new Error(`${label}: use até três casas decimais.`);\n  if (unit === 'un' && !Number.isInteger(n)) throw new Error(`${label}: unidades devem ser inteiras.`);\n  return scaled;\n}\nfunction orders(value) {\n  if ((typeof value !== 'number' && typeof value !== 'string') || (typeof value === 'string' && !/^\\d+$/.test(value.trim()))) throw new Error('Informe a quantidade inteira de pedidos.');\n  const n = Number(value);\n  if (!Number.isInteger(n) || n < 0 || n > MAX_ORDERS) throw new Error('Pedidos devem ser inteiros de 0 a 1.000.000.');\n  return n;\n}\nfunction text(value, label = 'Nome') {\n  if (typeof value !== 'string' || !value.trim() || value.trim().length > 80) throw new Error(`${label}: use entre 1 e 80 caracteres.`);\n  return value.trim();\n}\nfunction identifier(value) {\n  if (typeof value !== 'string' || !/^[a-zA-Z0-9_-]{1,80}$/.test(value)) throw new Error('Identificador inválido.');\n}\nfunction validateCatalog(ingredients, recipes, demand) {\n  if (!Array.isArray(ingredients) || !Array.isArray(recipes) || !demand || typeof demand !== 'object' || Array.isArray(demand)) throw new Error('Dados da operação inválidos.');\n  const allIds = new Set();\n  for (const i of ingredients) {\n    identifier(i.id); text(i.name); if (allIds.has(i.id)) throw new Error('Ingrediente duplicado.'); allIds.add(i.id);\n    if (!UNITS.includes(i.unit)) throw new Error('Unidade inválida.');\n    quantity(i.stock, i.unit, 'Estoque'); quantity(i.safety, i.unit, 'Reserva');\n  }\n  const recipeIds = new Set();\n  for (const r of recipes) {\n    identifier(r.id); text(r.name);\n    if (recipeIds.has(r.id)) throw new Error('Prato duplicado.'); recipeIds.add(r.id);\n    if (!Array.isArray(r.items) || !r.items.length) throw new Error('Adicione pelo menos um ingrediente à receita.');\n    const seen = new Set();\n    for (const item of r.items) {\n      const ingredient = ingredients.find(i => i.id === item.ingredientId);\n      if (!ingredient) throw new Error('A receita referencia um ingrediente que não existe.');\n      if (seen.has(item.ingredientId)) throw new Error('Não repita um ingrediente na mesma receita.'); seen.add(item.ingredientId);\n      if (item.unit !== ingredient.unit) throw new Error('A unidade da receita deve ser igual à do ingrediente.');\n      if (quantity(item.quantity, item.unit, 'Consumo por prato') <= 0) throw new Error('O consumo por prato deve ser maior que zero.');\n    }\n  }\n  for (const [id, n] of Object.entries(demand)) { if (!recipeIds.has(id)) throw new Error('Demanda com prato inexistente.'); orders(n); }\n}\nfunction calculate(ingredients, recipes, demand) {\n  validateCatalog(ingredients, recipes, demand);\n  const totals = new Map(ingredients.map(i => [i.id, 0]));\n  for (const recipe of recipes) for (const item of recipe.items) {\n    const amount = quantity(item.quantity, item.unit) * orders(demand[recipe.id] ?? 0);\n    const sum = totals.get(item.ingredientId) + amount;\n    if (!Number.isSafeInteger(sum)) throw new Error('Demanda excede o limite de cálculo seguro.');\n    totals.set(item.ingredientId, sum);\n  }\n  const rows = ingredients.map(i => {\n    const required = totals.get(i.id), stock = quantity(i.stock, i.unit), safety = quantity(i.safety, i.unit);\n    if (!Number.isSafeInteger(required + safety)) throw new Error('Demanda excede o limite de cálculo seguro.');\n    const projected = stock - required;\n    const shortage = Math.max(0, required - stock);\n    const replenish = Math.max(0, required + safety - stock);\n    return { ingredientId: i.id, name: i.name, unit: i.unit, stock: stock / 1000, safety: safety / 1000, required: required / 1000, projected: projected / 1000, shortage: shortage / 1000, replenish: replenish / 1000, risk: projected < 0 ? 'critical' : projected <= safety ? 'attention' : 'normal', affectedRecipes: recipes.filter(r => orders(demand[r.id] ?? 0) > 0 && r.items.some(it => it.ingredientId === i.id)).map(r => r.name) };\n  });\n  const menu = recipes.map(r => ({ recipeId: r.id, name: r.name, demand: orders(demand[r.id] ?? 0), capacity: Math.min(...r.items.map(it => Math.floor(quantity(ingredients.find(i => i.id === it.ingredientId).stock, it.unit) / quantity(it.quantity, it.unit)))), atRisk: orders(demand[r.id] ?? 0) > 0 && r.items.some(it => rows.some(row => row.ingredientId === it.ingredientId && row.shortage > 0)) }));\n  return { rows, menu, totalOrders: menu.reduce((sum, r) => sum + r.demand, 0) };\n}\nfunction explain(result) {\n  const critical = result.rows.filter(r => r.risk === 'critical');\n  const attention = result.rows.filter(r => r.risk === 'attention');\n  if (critical.length) return `${critical.length} ingrediente(s) não cobrem a demanda informada. Priorize a falta real antes de recompor a reserva. ${result.menu.filter(r => r.atRisk).length} prato(s) com pedidos estimados usam esses ingredientes; a divisão do estoque entre eles precisa ser decidida pelo responsável.`;\n  if (attention.length) return `A demanda informada cabe no estoque. ${attention.length} ingrediente(s) ficarão no limite ou abaixo da reserva. Revise a reposição antes do próximo atendimento.`;\n  return 'O estoque cobre a demanda informada e mantém todos os ingredientes acima da reserva configurada.';\n}\n\n\nconst AUTOMATION_SCHEMA_VERSION = 1;\nconst MAX_PACKET_LENGTH = 262144;\n// Contrato sem credenciais: somente uma fotografia operacional, nunca o backup inteiro.\nfunction validateAutomationPacket(packet) {\n  if (!packet || typeof packet !== 'object' || Array.isArray(packet) || packet.schemaVersion !== AUTOMATION_SCHEMA_VERSION || packet.origin !== 'radar-de-ruptura') throw new Error('Formato de análise para automação inválido.');\n  if (JSON.stringify(packet).length > MAX_PACKET_LENGTH) throw new Error('Arquivo de análise excede o limite de 256 mil caracteres.');\n  identifier(packet.analysisId);\n  if (typeof packet.createdAt !== 'string' || packet.createdAt.length > 40 || !Number.isFinite(Date.parse(packet.createdAt))) throw new Error('Data da análise inválida.');\n  const s = packet.snapshot;\n  if (!s || !Array.isArray(s.ingredients) || !Array.isArray(s.recipes) || !s.demand || typeof s.demand !== 'object' || Array.isArray(s.demand)) throw new Error('Fotografia da análise inválida.');\n  if (s.ingredients.length > 500 || s.recipes.length > 200 || Object.keys(s.demand).length > 200 || s.recipes.some(r => !Array.isArray(r?.items) || r.items.length > 500)) throw new Error('A análise excede os limites da demonstração.');\n  const result = calculate(s.ingredients, s.recipes, s.demand);\n  // Seleção explícita de campos evita exportar propriedades estranhas ao domínio.\n  const snapshot = {\n    ingredients: s.ingredients.map(i => ({id:i.id,name:i.name,unit:i.unit,stock:i.stock,safety:i.safety})),\n    recipes: s.recipes.map(r => ({id:r.id,name:r.name,items:r.items.map(i => ({ingredientId:i.ingredientId,quantity:i.quantity,unit:i.unit}))})),\n    demand: Object.fromEntries(Object.entries(s.demand))\n  };\n  return {schemaVersion:AUTOMATION_SCHEMA_VERSION,origin:'radar-de-ruptura',analysisId:packet.analysisId,createdAt:packet.createdAt,snapshot,result};\n}\n\nfunction automationPacket(analysis) {\n  const validated = validateAutomationPacket({schemaVersion:AUTOMATION_SCHEMA_VERSION,origin:'radar-de-ruptura',analysisId:analysis.id,createdAt:analysis.createdAt,snapshot:analysis.snapshot});\n  if (JSON.stringify(validated.result) !== JSON.stringify(analysis.result)) throw new Error('A análise contém um resultado inconsistente.');\n  const {result, ...packet} = validated;\n  return packet;\n}\n\nfunction processAutomationPacket(packet) {\n  const validated = validateAutomationPacket(packet);\n  const result = validated.result;\n  const proposals = result.rows.filter(r => r.replenish > 0).map(r => ({\n    ingredientId:r.ingredientId,name:r.name,unit:r.unit,shortage:r.shortage,quantity:r.replenish,\n    priority:r.shortage > 0 ? 'critical' : 'safety',status:'pending',\n    reason:r.shortage > 0 ? 'Atender demanda e recompor reserva' : 'Recompor reserva'\n  })).sort((a,b) => Number(b.priority === 'critical') - Number(a.priority === 'critical') || a.name.localeCompare(b.name,'pt-BR'));\n  return {\n    schemaVersion:AUTOMATION_SCHEMA_VERSION,analysisId:validated.analysisId,createdAt:validated.createdAt,\n    processing:'deterministic',summary:explain(result),\n    criticalCount:result.rows.filter(r=>r.risk==='critical').length,\n    attentionCount:result.rows.filter(r=>r.risk==='attention').length,\n    totalOrders:result.totalOrders,requiresReview:proposals.length > 0,\n    proposals,result,approvalRequired:true,inventoryChanged:false,purchaseCreated:false\n  };\n}\n\nconst result = processAutomationPacket($input.first().json);\nresult.automation = {platform:\"n8n\",executionId:String($execution.id),workflowId:String($workflow.id)};\nreturn [{json:result}];\n"
+      }
+    },
+    {
+      "id": "report",
+      "name": "Relatório para revisão humana",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "return $input.all().map(item => ({json:{analysisId:item.json.analysisId,automation:item.json.automation,summary:item.json.summary,criticalCount:item.json.criticalCount,totalOrders:item.json.totalOrders,proposals:item.json.proposals,approvalRequired:true,inventoryChanged:false,purchaseCreated:false}}));"
+      }
+    },
+    {
+      "id": "note",
+      "name": "Como usar",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        190,
+        -290
+      ],
+      "parameters": {
+        "width": 780,
+        "height": 220,
+        "content": "## Revisão sem APIs pagas\nO início é manual e protegido pelo login do editor n8n. Em **Dados da análise**, use JSON Output em modo Fixed e substitua o exemplo pelo JSON exportado de uma análise do Radar. Execute o workflow e confira o relatório. Não há webhook público, compra ou alteração de estoque. A demonstração do GitHub Pages continua local e independente."
+      }
+    }
+  ],
+  "connections": {
+    "Iniciar revisão": {
+      "main": [
+        [
+          {
+            "node": "Dados da análise",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados da análise": {
+      "main": [
+        [
+          {
+            "node": "Validar e preparar reposições",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar e preparar reposições": {
+      "main": [
+        [
+          {
+            "node": "Relatório para revisão humana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all"
+  },
+  "pinData": {},
+  "tags": []
+}

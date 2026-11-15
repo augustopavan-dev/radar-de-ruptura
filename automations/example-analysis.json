@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "origin": "radar-de-ruptura",
+  "analysisId": "exemplo-x-burger",
+  "createdAt": "2026-11-15T12:00:00.000Z",
+  "snapshot": {
+    "ingredients": [
+      {
+        "id": "pao",
+        "name": "Pão de hambúrguer",
+        "unit": "un",
+        "stock": 8,
+        "safety": 0
+      },
+      {
+        "id": "carne",
+        "name": "Hambúrguer bovino",
+        "unit": "un",
+        "stock": 15,
+        "safety": 0
+      },
+      {
+        "id": "queijo",
+        "name": "Queijo muçarela",
+        "unit": "kg",
+        "stock": 0.6,
+        "safety": 0.2
+      },
+      {
+        "id": "batata",
+        "name": "Batata pré-frita",
+        "unit": "kg",
+        "stock": 3,
+        "safety": 1
+      },
+      {
+        "id": "oleo",
+        "name": "Óleo vegetal",
+        "unit": "L",
+        "stock": 2,
+        "safety": 0.5
+      },
+      {
+        "id": "alface",
+        "name": "Alface higienizada",
+        "unit": "kg",
+        "stock": 0.5,
+        "safety": 0.1
+      }
+    ],
+    "recipes": [
+      {
+        "id": "burger",
+        "name": "X-Burger",
+        "items": [
+          {
+            "ingredientId": "pao",
+            "quantity": 1,
+            "unit": "un"
+          },
+          {
+            "ingredientId": "carne",
+            "quantity": 1,
+            "unit": "un"
+          },
+          {
+            "ingredientId": "queijo",
+            "quantity": 0.025,
+            "unit": "kg"
+          }
+        ]
+      },
+      {
+        "id": "fritas",
+        "name": "Porção de fritas",
+        "items": [
+          {
+            "ingredientId": "batata",
+            "quantity": 0.25,
+            "unit": "kg"
+          },
+          {
+            "ingredientId": "oleo",
+            "quantity": 0.03,
+            "unit": "L"
+          }
+        ]
+      },
+      {
+        "id": "salada",
+        "name": "Salada do bistrô",
+        "items": [
+          {
+            "ingredientId": "alface",
+            "quantity": 0.1,
+            "unit": "kg"
+          },
+          {
+            "ingredientId": "queijo",
+            "quantity": 0.025,
+            "unit": "kg"
+          }
+        ]
+      }
+    ],
+    "demand": {
+      "burger": 12,
+      "fritas": 8,
+      "salada": 4
+    }
+  }
+}
